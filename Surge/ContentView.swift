@@ -1,12 +1,6 @@
-//
-//  ContentView.swift
-//  Surge
-//
-//  Created by Jiong on 2025/3/1.
-//
-
 import SwiftUI
 import SwiftData
+import AVFoundation
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
