@@ -12,6 +12,16 @@ struct ContentView: View {
                 ForEach(items) { item in
                     NavigationLink {
                         Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                            .contextMenu {
+                                Button("Play text") {
+                                        let utterance = AVSpeechUtterance(string: "你好 你好")
+                                        // 指定使用中文语音
+                                        utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
+
+                                        let synthesizer = AVSpeechSynthesizer()
+                                        synthesizer.speak(utterance)
+                                    }
+                            }
                     } label: {
                         Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
                     }
