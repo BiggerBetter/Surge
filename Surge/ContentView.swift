@@ -5,6 +5,8 @@ import AVFoundation
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    
+    let synthesizer = AVSpeechSynthesizer()
 
     var body: some View {
         NavigationSplitView {
@@ -14,12 +16,15 @@ struct ContentView: View {
                         Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
                             .contextMenu {
                                 Button("Play text") {
-                                        let utterance = AVSpeechUtterance(string: "你好 你好")
+                                        let utterance = AVSpeechUtterance(string: "好痛 好痛")
                                         // 指定使用中文语音
                                         utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
-
-                                        let synthesizer = AVSpeechSynthesizer()
+//                                        for voice in AVSpeechSynthesisVoice.speechVoices() {
+//                                            print("语音名称: \(voice.name), 语言: \(voice.language), 标识符: \(voice.identifier)")
+//                                        }
+                                        utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-CN.Yue")
                                         synthesizer.speak(utterance)
+                                    
                                     }
                             }
                     } label: {
